@@ -1,0 +1,68 @@
+/*reset*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+
+body {font-family: "나눔 고딕","Nanum Gothic","맑은 고딕","Malgun Gothic","Apple Gothic","돋움",Dotum,"Helvetica Neue",Helvetica,Arial,sans-serif !important;}
+body {font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif; font-size: 14px; line-height: 1.43; color: #565a5c; background-color: #f5f5f5; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;}
+
+
+
+.calendar-wrap {border:1px solid #ebebeb; background:#fff; margin:0 auto; padding:20px;}
+.calendar {width:100%; padding:10px;}
+.calendar caption{position:absolute;left:-10000px;top:auto;height:1px;overflow:hidden;}
+.calendar .days {padding:15px; text-align:center; border:1px solid #e4e7e7; color:#717171; background:#fff; cursor:pointer;}
+.calendar .days.on {background:#ebebeb;}
+.calendar .days.clicked {background:#00d1c1;border:1px double #00d1c1; color:#fff;}
+.calendar .days.between {background:#37E6D9;border:1px double #37E6D9; color:#fff;}
+.calendar .days.disabled {}
+.calendar .days > span {font-size:14px;}
+
+.current-date__sect {position:relative; text-align:center; padding:10px 5px 12px;}
+.current-date__date {font-size:18px; font-weight:bold;}
+.current-date__picker {width:100%; position:absolute;top:13px;left:0;}
+.current-date__picker > span {position:inherit; padding:2px; border:1px solid #B7B7B7; cursor:pointer;}
+.current-date__picker .left {left:10px;}
+.current-date__picker .right {right:10px;}
