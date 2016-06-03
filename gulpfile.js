@@ -4,10 +4,12 @@ const http = require('http');
 const gulp = require('gulp');
 const express = require('express');
 const browserify = require('browserify');
-const vinyl = require('vinyl-source-stream');
+const source = require('vinyl-source-stream');
+const buffer = require('vinyl-buffer');
 const path = require('path');
 const browserSync = require('browser-sync').create();
 const app = express();
+const uglify = require('gulp-uglify');
 
 
 app.use('/js', express.static(path.join(__dirname, 'js')));
@@ -24,7 +26,9 @@ gulp.task('browserify', function(){
 	browserify('./src/index.js')
 	.transform('babelify', {presets:['react', 'es2015']})
 	.bundle()
-	.pipe(vinyl('bundle.js'))
+	.pipe(source('bundle.js'))
+	.pipe(buffer())
+	.pipe(uglify())
 	.pipe(gulp.dest('./js/'))
 	.pipe(browserSync.reload({stream: true}));
 });

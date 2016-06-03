@@ -12,14 +12,19 @@ export default class Calendar extends Component{
 		this.lastMonthDay = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 		this.state = {
 			currentDate:{
-				year:1983, //올해
-				month:0, //이번달 0 ~ 11
-				day:1 //오늘
+				year:1983, 	//올해
+				month:0 	//이번달 0 ~ 11
 			},
 			startWeek:0,
 			currentDays:[],
-			startDay:0,
-			endDay:0
+			startDate:{
+				year:0,
+				month:0
+			},
+			endDate:{
+				year:0,
+				month:0
+			}
 		}
 	}
 
@@ -27,9 +32,8 @@ export default class Calendar extends Component{
 		var date = new Date();
 		var year = date.getFullYear();
 		var month = date.getMonth();
-		var day = date.getDate();
 
-		this._reState(year, month, day);
+		this._reState(year, month);
 	}
 
 	/*shouldComponentUpdate(props, state){
@@ -38,7 +42,7 @@ export default class Calendar extends Component{
 	}*/
 
 
-	_reState(year, month, day){
+	_reState(year, month){
 		var yunIS = (((year%4)==0&&(year%100)!=0)||(year%400)==0)?true:false;
 		this.lastMonthDay[1] = (yunIS)?29:28;
 
@@ -56,8 +60,7 @@ export default class Calendar extends Component{
 			return {
 				currentDate:{
 					year:year, //올해
-					month:month, //이번달 0 ~ 11
-					day:(day)?day:state.currentDate.day
+					month:month //이번달 0 ~ 11
 				},
 				startWeek:startWeek,
 				currentDays:matrixDays
@@ -119,6 +122,10 @@ export default class Calendar extends Component{
 		this._reState(year, month);
 	}
 
+	_dayPickerFunc(day){
+		console.log(day);
+	}
+
 	render(){
 		let weeks = this.weeks.map(function(prop, index){
 			return <th key={index}>{prop}</th>
@@ -131,7 +138,7 @@ export default class Calendar extends Component{
 					<thead>
 						<tr>{weeks}</tr>
 					</thead>
-					<DaysPicker currentDay={this.state.currentDate.day} days={this.state.currentDays} />
+					<DaysPicker currentDate={this.state.currentDate} days={this.state.currentDays} pickerFunc={(day)=>this._dayPickerFunc(day)} />
 				</table>
 			</div>
 		)
