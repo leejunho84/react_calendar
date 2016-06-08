@@ -1,35 +1,38 @@
 'use strict';
 
 import React, { Component } from 'react';
+import Day from './day';
 
 
 export default class DaysPicker extends Component {
-	constructor(){
-		super()
-
-		var date = new Date();
-		this.year = date.getFullYear();
-		this.month = date.getMonth();
-		this.day = date.getDate();
-	}
-
-	_onClick(e){
-		console.log(this);
-		//this.props.pickerFunc(1);
+	_dateExchange(str){
+		return (str.length>1)?str:'0'+str;
 	}
 
 	render(){
-		let { currentDate, days } = this.props;
+		let { pickerFunc, today, currentDate, startDate, endDate, days } = this.props;
 		let templete = days.map((prop, index)=>{
 			let temp = prop.map((prop, index)=>{
-				let currentDayIS = (currentDate.year == this.year && currentDate.month == this.month && prop == this.day) ? true : false;
+
+				if(prop){
+					var currentDay = currentDate.year.toString() + this._dateExchange(currentDate.month.toString()) + this._dateExchange(prop.toString());
+					var currentDayIS = (today == currentDay)?true:false;
+					var startDayIS = (currentDay == startDate)?true:false;
+					var betweenDayIS = (parseInt(startDate) < parseInt(currentDay) && parseInt(endDate) > parseInt(currentDay))?true:false;
+					var endDayIS = (currentDay==endDate)?true:false;
+					var disabledIS = (parseInt(startDate) > currentDay)?true:false;
+				}
+
 				return (
-					<td className={(currentDayIS)?'days today':'days'} 
+					<Day 
 						key={index}
-						onClick={(e)=>{console.log(this)}} 
-						data-date={prop}>
-						<span>{prop}</span>
-					</td>
+						day={prop}
+						currentDayIS={currentDayIS}
+						startDayIS={startDayIS}
+						betweenDayIS={betweenDayIS}
+						endDayIS={endDayIS}
+						disabledIS={disabledIS}
+						onclick={pickerFunc} />
 				)
 			});
 			return (<tr key={index}>{temp}</tr>);

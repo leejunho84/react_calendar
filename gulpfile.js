@@ -27,8 +27,8 @@ gulp.task('browserify', function(){
 	.transform('babelify', {presets:['react', 'es2015']})
 	.bundle()
 	.pipe(source('bundle.js'))
-	.pipe(buffer())
-	.pipe(uglify())
+	//.pipe(buffer())
+	//.pipe(uglify())
 	.pipe(gulp.dest('./js/'))
 	.pipe(browserSync.reload({stream: true}));
 });

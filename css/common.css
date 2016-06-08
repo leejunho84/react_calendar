@@ -53,12 +53,13 @@ body {font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif; font-si
 .calendar-wrap {border:1px solid #ebebeb; background:#fff; margin:0 auto; padding:20px;}
 .calendar {width:100%; padding:10px;}
 .calendar caption{position:absolute;left:-10000px;top:auto;height:1px;overflow:hidden;}
+.calendar .days {height:14vw; vertical-align:middle; text-align:center; border:1px solid #e4e7e7; color:#717171; background:#fff; cursor:pointer;}
 .calendar .days.today {background:#f00;color:#fff;font-weight:bold;}
-.calendar .days {padding:15px; text-align:center; border:1px solid #e4e7e7; color:#717171; background:#fff; cursor:pointer;}
-.calendar .days.on {background:#ebebeb;}
-.calendar .days.clicked {background:#00d1c1;border:1px double #00d1c1; color:#fff;}
-.calendar .days.between {background:#37E6D9;border:1px double #37E6D9; color:#fff;}
-.calendar .days.disabled {}
+.calendar .today.disabled {background:#fff;color:#ccc;font-weight:normal;}
+.calendar .days:hover {background:#ebebeb; color:#717171; font-weight:none;}
+.calendar .days.clicked {background:#00d1c1;color:#fff;}
+.calendar .days.between {background:#37E6D9;color:#fff;}
+.calendar .days.disabled {text-decoration: line-through; color:#ccc;}
 .calendar .days > span {font-size:14px;}
 
 .current-date__sect {position:relative; text-align:center; padding:10px 5px 12px;}

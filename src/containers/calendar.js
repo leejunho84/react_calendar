@@ -8,23 +8,20 @@ export default class Calendar extends Component{
 	constructor(){
 		super();
 
+		this.choiceIS = false,
 		this.weeks = ['일', '월', '화', '수', '목', '금', '토'];
 		this.lastMonthDay = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 		this.state = {
-			currentDate:{
-				year:1983, 	//올해
-				month:0 	//이번달 0 ~ 11
-			},
 			startWeek:0,
 			currentDays:[],
-			startDate:{
-				year:0,
+			choiceIS:false,
+			currentDate:{
+				year:1583,
 				month:0
 			},
-			endDate:{
-				year:0,
-				month:0
-			}
+			todayDate:0,
+			startDate:0,
+			endDate:0
 		}
 	}
 
@@ -32,15 +29,15 @@ export default class Calendar extends Component{
 		var date = new Date();
 		var year = date.getFullYear();
 		var month = date.getMonth();
+		var day = date.getDate();
 
+		this.setState({todayDate:year.toString()+this._dateExchange(month.toString())+this._dateExchange(day.toString())});
 		this._reState(year, month);
 	}
 
-	/*shouldComponentUpdate(props, state){
-		console.log(state);
-		return true;
-	}*/
-
+	_changeDate(date){
+		return date.slice(/\s{4}\s{2}\s{2}/);
+	}
 
 	_reState(year, month){
 		var yunIS = (((year%4)==0&&(year%100)!=0)||(year%400)==0)?true:false;
@@ -59,15 +56,14 @@ export default class Calendar extends Component{
 		this.setState((state)=>{
 			return {
 				currentDate:{
-					year:year, //올해
-					month:month //이번달 0 ~ 11
+					year:year,
+					month:month
 				},
 				startWeek:startWeek,
 				currentDays:matrixDays
 			}
 		});
 	}
-
 
 	_daysTable(week, month){
 		var totalCell = this.lastMonthDay[month]+week;
@@ -107,7 +103,7 @@ export default class Calendar extends Component{
 		return Math.floor((year-1)/4) - Math.floor((year-1)/100) + Math.floor((year-1)/400);
 	}
 
-	_pickerFunc(counter){
+	_monthPickerFunc(counter){
 		var year = this.state.currentDate.year;
 		var month = counter;
 
@@ -122,8 +118,27 @@ export default class Calendar extends Component{
 		this._reState(year, month);
 	}
 
+
+	_dateExchange(str){
+		return (str.length>1)?str:'0'+str;
+	}
+
 	_dayPickerFunc(day){
-		console.log(day);
+		this.setState((state)=>{
+			var date = state.currentDate.year.toString() + this._dateExchange(state.currentDate.month.toString()) + this._dateExchange(day.toString());
+			if(!state.choiceIS){
+				state.choiceIS = true;
+				return {
+					startDate:date,
+					endDate:0
+				}
+			}else{
+				state.choiceIS = false;
+				return {
+					endDate:date
+				}
+			}
+		});
 	}
 
 	render(){
@@ -132,13 +147,19 @@ export default class Calendar extends Component{
 		});
 		return (
 			<div id="calendar">
-				<YearMonthPicker pickerFunc={(counter)=>this._pickerFunc(counter)} currentDate={this.state.currentDate} />
+				<YearMonthPicker pickerFunc={(counter)=>this._monthPickerFunc(counter)} currentDate={this.state.currentDate} />
 				<table className="calendar">
 					<caption>달력</caption>
 					<thead>
 						<tr>{weeks}</tr>
 					</thead>
-					<DaysPicker currentDate={this.state.currentDate} days={this.state.currentDays} pickerFunc={(day)=>this._dayPickerFunc(day)} />
+					<DaysPicker 
+						today={this.state.todayDate}
+						currentDate={this.state.currentDate} 
+						startDate={this.state.startDate} 
+						endDate={this.state.endDate}
+						days={this.state.currentDays} 
+						pickerFunc={(day)=>this._dayPickerFunc(day)} />
 				</table>
 			</div>
 		)
