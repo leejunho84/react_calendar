@@ -21,6 +21,9 @@ export default class DaysPicker extends Component {
 					var betweenDayIS = (parseInt(startDate) < parseInt(currentDay) && parseInt(endDate) > parseInt(currentDay))?true:false;
 					var endDayIS = (currentDay==endDate)?true:false;
 					var disabledIS = (parseInt(startDate) > currentDay)?true:false;
+					var clickIS = (!prop || disabledIS) ? false : true;
+				}else{
+					var clickIS = (!prop || disabledIS) ? false : true;
 				}
 
 				return (
@@ -32,6 +35,7 @@ export default class DaysPicker extends Component {
 						betweenDayIS={betweenDayIS}
 						endDayIS={endDayIS}
 						disabledIS={disabledIS}
+						clickIS={clickIS}
 						onclick={pickerFunc} />
 				)
 			});

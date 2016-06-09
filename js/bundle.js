@@ -19070,8 +19070,10 @@ var Day = function (_Component) {
 	_createClass(Day, [{
 		key: '_onClick',
 		value: function _onClick() {
-			var _that = this.refs.day;
-			this.props.onclick(_that.getAttribute('data-date'));
+			if (this.props.clickIS) {
+				var _that = this.refs.day;
+				this.props.onclick(_that.getAttribute('data-date'));
+			}
 		}
 	}, {
 		key: 'render',
@@ -19175,6 +19177,9 @@ var DaysPicker = function (_Component) {
 						var betweenDayIS = parseInt(startDate) < parseInt(currentDay) && parseInt(endDate) > parseInt(currentDay) ? true : false;
 						var endDayIS = currentDay == endDate ? true : false;
 						var disabledIS = parseInt(startDate) > currentDay ? true : false;
+						var clickIS = !prop || disabledIS ? false : true;
+					} else {
+						var clickIS = !prop || disabledIS ? false : true;
 					}
 
 					return _react2.default.createElement(_day2.default, {
@@ -19185,6 +19190,7 @@ var DaysPicker = function (_Component) {
 						betweenDayIS: betweenDayIS,
 						endDayIS: endDayIS,
 						disabledIS: disabledIS,
+						clickIS: clickIS,
 						onclick: pickerFunc });
 				});
 				return _react2.default.createElement(

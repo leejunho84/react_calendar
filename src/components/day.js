@@ -4,8 +4,10 @@ import React, {Component} from 'react';
 
 export default class Day extends Component {
 	_onClick(){
-		let _that = this.refs.day;
-		this.props.onclick(_that.getAttribute('data-date'));
+		if(this.props.clickIS){
+			let _that = this.refs.day;
+			this.props.onclick(_that.getAttribute('data-date'));
+		}
 	}
 
 	render(){
