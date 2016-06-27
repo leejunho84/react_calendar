@@ -19070,10 +19070,12 @@ var Day = function (_Component) {
 	_createClass(Day, [{
 		key: '_onClick',
 		value: function _onClick() {
-			if (this.props.clickIS) {
-				var _that = this.refs.day;
-				this.props.onclick(_that.getAttribute('data-date'));
-			}
+			/*if(this.props.clickIS){
+   	let _that = this.refs.day;
+   	this.props.onclick(_that.getAttribute('data-date'));
+   }*/
+			var _that = this.refs.day;
+			this.props.onclick(_that.getAttribute('data-date'));
 		}
 	}, {
 		key: 'render',
@@ -19471,6 +19473,7 @@ var Calendar = function (_Component) {
 
 			this.setState(function (state) {
 				var date = state.currentDate.year.toString() + _this2._dateExchange(state.currentDate.month.toString()) + _this2._dateExchange(day.toString());
+				if (state.choiceIS && parseInt(state.startDate) > parseInt(date)) state.choiceIS = false;
 				if (!state.choiceIS) {
 					state.choiceIS = true;
 					return {

@@ -126,6 +126,7 @@ export default class Calendar extends Component{
 	_dayPickerFunc(day){
 		this.setState((state)=>{
 			var date = state.currentDate.year.toString() + this._dateExchange(state.currentDate.month.toString()) + this._dateExchange(day.toString());
+			if(state.choiceIS && parseInt(state.startDate) > parseInt(date)) state.choiceIS = false;
 			if(!state.choiceIS){
 				state.choiceIS = true;
 				return {

@@ -1,13 +1,15 @@
 'use strict';
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 export default class Day extends Component {
 	_onClick(){
-		if(this.props.clickIS){
+		/*if(this.props.clickIS){
 			let _that = this.refs.day;
 			this.props.onclick(_that.getAttribute('data-date'));
-		}
+		}*/
+		let _that = this.refs.day;
+		this.props.onclick(_that.getAttribute('data-date'));
 	}
 
 	render(){
